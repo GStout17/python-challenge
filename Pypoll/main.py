@@ -18,18 +18,23 @@ with open(election_data_csv_path, newline="") as csvfile:
 
     csv_reader = csv.reader(csvfile, delimiter=",")
 
-    # Read the header  of the first row
+    # Read the header of the first row
     csv_header = next(csvfile)
 
     # Creating loop to read through each row (not including the header)
     for row in csv_reader:
 
+        # Appened to store
         candidates.append(row[2])
 
     # Sorting our list
     sorted_list = sorted(candidates)
     
-    # Arrange the sorted list by most common outcomes
-    arrange_list = sorted_list
+    # Organize the sorted list by most common outcomes
+    ordered_list = sorted_list
 
- 
+    # Count votes per candidate then append to the created list
+    count_candidate = Counter (ordered_list) 
+    votes_per_candidate.append(count_candidate.most_common())
+
+
