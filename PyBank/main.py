@@ -64,7 +64,7 @@ with open(bank_csv_path, newline="") as csvfile:
         best_date = date[highest_month_index]
         worst_date = date[lowest_month_index]
 
-# -->>  Print the analysis to the terminal
+# Printing the financial analysis
 print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months:  {total_months}")
@@ -72,6 +72,19 @@ print(f"Total:  ${net_profit}")
 print(f"Average Change:  ${average_change_profits}")
 print(f"Greatest Increase in Profits:  {best_date} (${greatest_increase})")
 print(f"Greatest Decrease in Losses:  {worst_date} (${greatest_decrease})")
+
+# Export the results to a .txt file
+with open("financial_analysis.txt", "w") as txt_file:
+
+    txt_file.write("Financial Analysis\n")
+    txt_file.write("----------------------------\n")
+    txt_file.write(f"Total Months:  {total_months}\n")
+    txt_file.write(f"Total:  ${net_profit}\n")
+    txt_file.write(f"Average Change:  ${average_change_profits}\n")
+    txt_file.write(f"Greatest Increase in Profits:  {best_date} (${greatest_increase})\n")
+    txt_file.write(f"Greatest Decrease in Losses:  {worst_date} (${greatest_decrease})\n")
+
+
 
 
 
