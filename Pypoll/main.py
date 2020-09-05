@@ -37,7 +37,7 @@ with open(election_data_csv_path, newline="") as csvfile:
     count_candidate = Counter (ordered_list) 
     votes_per_candidate.append(count_candidate.most_common())
 
-    # finding the percentage of votes per candicate (three digit places! '.3f')
+    # finding the percentage of votes per candidate (three digit places! '.3f')
     for item in votes_per_candidate:
        
         first = format((item[0][1])*100/(sum(count_candidate.values())),'.3f')
@@ -58,4 +58,17 @@ print("-------------------------")
 print(f"Winner:  {votes_per_candidate[0][0][0]}")
 print("-------------------------")
 
+# Export the results to a .txt file
+with open("election_data.txt", "w") as txt_file:
 
+    txt_file.write("Election Results\n")
+    txt_file.write("-------------------------\n")
+    txt_file.write(f"Total Votes:  {sum(count_candidate.values())}\n")
+    txt_file.write("-------------------------\n")
+    txt_file.write(f"{votes_per_candidate[0][0][0]}: {first}% ({votes_per_candidate[0][0][1]})\n")
+    txt_file.write(f"{votes_per_candidate[0][1][0]}: {second}% ({votes_per_candidate[0][1][1]})\n")
+    txt_file.write(f"{votes_per_candidate[0][2][0]}: {third}% ({votes_per_candidate[0][2][1]})\n")
+    txt_file.write(f"{votes_per_candidate[0][3][0]}: {fourth}% ({votes_per_candidate[0][3][1]})\n")
+    txt_file.write("-------------------------\n")
+    txt_file.write(f"Winner:  {votes_per_candidate[0][0][0]}\n")
+    txt_file.write("-------------------------\n")    
