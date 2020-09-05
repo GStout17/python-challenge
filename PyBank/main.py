@@ -10,15 +10,13 @@ bank_csv_path = os.path.join('Resources', 'budget_data.csv')
 months = []
 total_net_profit = []
 monthly_changes = []
-
+date = []
 
 total_months = 0
 net_profit = 0
 profit_changes = 0
 previous_monthly_profit= 0
 Average_profit_change = 0
-greatest_increase = ["", 0]
-greatest_decrease = ["", 9999999999999999999999]
 
 
 # Read in the CSV file
@@ -39,6 +37,9 @@ with open(bank_csv_path, newline="") as csvfile:
         total_months = total_months +1
         net_profit = net_profit +int(row[1]) 
 
+        # Needed for indexing/calculating greatest/worst profit increase
+        months.append(row[0])
+
         # Finding the profit changes by each month
         profit_changes = int(row[1]) - previous_monthly_profit
         previous_monthly_profit = int(row[1])
@@ -48,14 +49,30 @@ with open(bank_csv_path, newline="") as csvfile:
 
         # Finding the average in profits
         average_change_profits = (net_profit/total_months)
-        print(average_change_profits)
+    
         #profit_changes.append(int(row[1]))
 
         # Finding the greatest increase and decrease in profits
+        greatest_increase = max(monthly_changes)
+        greatest_decrease = min(monthly_changes)
         
 
+        # Locate the index value of highest and lowest changes in "Profit/Losses" over the entire period
+        highest_month_index = monthly_changes.index(greatest_increase)
+        lowest_month_index = monthly_changes.index(greatest_decrease)
+        #increase_date = date[monthly_changes.index(greatest_increase)]
+        #decrease_date = date[monthly_changes.index(greatest_decrease)]
+        
+         # Assign best and worst month
+        best_month = months[highest_month_index]
+        worst_month = months[lowest_month_index]
 
-        #if profit_changes = int(row[1])
+        print(best_month)
+        print(worst_month)
+
+        #best_month = months[highest_month_index]
+        #worst_month = months[lowest_month_index]
+
 
 
     
