@@ -14,7 +14,7 @@ total_months = 0
 net_profit = 0
 profit_changes = 0
 previous_monthly_profit= 0
-
+current_month_profit_loss = 0
 
 # Read in the CSV file
 with open(bank_csv_path, newline="") as csvfile:
@@ -30,6 +30,8 @@ with open(bank_csv_path, newline="") as csvfile:
     # Creating loop to read through each row (not including the header)
     for row in csvreader:
 
+        
+
         # Getting the total months and total net profit
         total_months = total_months +1
         net_profit = net_profit +int(row[1]) 
@@ -44,8 +46,9 @@ with open(bank_csv_path, newline="") as csvfile:
         # Store profit changes of each month in a list
         monthly_changes.append(profit_changes)
 
-        # Finding the average in profits
-        average_change_profits = (net_profit/total_months)
+        # Finding the average in profits across the entire time frame (don't forget about rounding!)
+        #average_change_profits = round(net_profit/(total_months), 2)
+        average_change_profits = sum(monthly_changes) / len(monthly_changes)
 
         # Finding the greatest increase and decrease in profits
         greatest_increase = max(monthly_changes)
