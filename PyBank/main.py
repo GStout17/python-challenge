@@ -1,5 +1,5 @@
 
-#Import OS and CSV to read/write excel data
+#Import OS and CSV to read/write excel data (dependancies)
 import os
 import csv
 
@@ -14,27 +14,30 @@ total_months = 0
 net_profit = 0
 profit_changes = 0
 previous_monthly_profit= 0
-current_month_profit_loss = 0
+current_month_profit = 0
 
 # Read in the CSV file
 with open(bank_csv_path, newline="") as csvfile:
 
-    # Split the data on commas
+    # Split the data via commas
     csvreader = csv.reader(csvfile, delimiter=',')
 
     # Reading the 1st header (column)
     header = next(csvfile)
 
-    # print(f"header: {header}") 
-
     # Creating loop to read through each row (not including the header)
     for row in csvreader:
 
-        
 
         # Getting the total months and total net profit
         total_months = total_months +1
-        net_profit = net_profit +int(row[1]) 
+        current_month_profit = int(row[1])
+        net_profit += current_month_profit
+
+        # This allows for the correct average change by making the previous month equal to the current month
+        if (total_months ==1):
+            previous_monthly_profit = current_month_profit
+            continue
 
         # Needed for indexing/calculating greatest & worst profit increase
         date.append(row[0])
@@ -47,8 +50,7 @@ with open(bank_csv_path, newline="") as csvfile:
         monthly_changes.append(profit_changes)
 
         # Finding the average in profits across the entire time frame (don't forget about rounding!)
-        #average_change_profits = round(net_profit/(total_months), 2)
-        average_change_profits = sum(monthly_changes) / len(monthly_changes)
+        average_change_profits = round((sum(monthly_changes) / len(monthly_changes)), 2)
 
         # Finding the greatest increase and decrease in profits
         greatest_increase = max(monthly_changes)
@@ -59,8 +61,8 @@ with open(bank_csv_path, newline="") as csvfile:
         lowest_month_index = monthly_changes.index(greatest_decrease)
         
         # Assing the best and worst date
-        best_month = date[highest_month_index]
-        worst_month = date[lowest_month_index]
+        best_date = date[highest_month_index]
+        worst_date = date[lowest_month_index]
 
 # -->>  Print the analysis to the terminal
 print("Financial Analysis")
@@ -68,8 +70,8 @@ print("----------------------------")
 print(f"Total Months:  {total_months}")
 print(f"Total:  ${net_profit}")
 print(f"Average Change:  ${average_change_profits}")
-print(f"Greatest Increase in Profits:  {best_month} (${greatest_increase})")
-print(f"Greatest Decrease in Losses:  {worst_month} (${greatest_decrease})")
+print(f"Greatest Increase in Profits:  {best_date} (${greatest_increase})")
+print(f"Greatest Decrease in Losses:  {worst_date} (${greatest_decrease})")
 
 
 
