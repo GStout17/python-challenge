@@ -1,6 +1,6 @@
 # PyBank and PyPoll
 
-- PyBank: Analysis of finical records
+- PyBank: Analysis of financial records
 - Pyoll: Analysis of election results 
 
 # Background information
@@ -14,7 +14,7 @@ Pybank: This uses the data called budget_data.csv to create a python script
 - The greatest decrease in losses (date and amount) over the entire period
 
 
-PyPoll: This uses data from election_data.csv to create a python script 
+PyPoll: This uses data from election_data.csv to create a python script
 
 - The total number of votes cast
 - A complete list of candidates who received votes
